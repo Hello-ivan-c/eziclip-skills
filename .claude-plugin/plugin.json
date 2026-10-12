@@ -1,0 +1,8 @@
+{
+  "name": "eziclip",
+  "description": "Skills for editing video with Eziclip Studio through its MCP server or the eziclip CLI.",
+  "version": "0.1.0",
+  "author": { "name": "Eziclip" },
+  "homepage": "https://eziclip.com/ai",
+  "license": "MIT"
+}

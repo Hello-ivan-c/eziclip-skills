@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "eziclip": {
+      "command": "npx",
+      "args": ["-y", "eziclip", "mcp"]
+    }
+  }
+}
