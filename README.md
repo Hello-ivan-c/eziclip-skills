@@ -36,6 +36,8 @@ curl -fsSL https://eziclip.com/skills/eziclip-video/SKILL.md -o ~/.claude/skills
 The skills teach the workflow; the tools come from Eziclip's MCP server:
 
 - hosted link: https://eziclip.com/ai/mcp (open Studio → Connect AI agent → Copy link)
+- or the CLI (headless, files by path): `claude mcp add eziclip -- npx -y eziclip mcp` — see
+  https://eziclip.com/ai/cli
 
 `.mcp.json` and `.claude-plugin/plugin.json` make this repo installable as a Claude Code plugin.
 
