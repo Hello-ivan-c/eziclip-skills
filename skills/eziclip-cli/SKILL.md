@@ -1,12 +1,16 @@
 ---
 name: eziclip-cli
-description: Operate the eziclip command-line tool — sign in from the browser, check Chrome and the plan, and run the headless Eziclip Studio MCP server. Use when the user wants to set up or troubleshoot eziclip in a terminal, CI or an agent config.
+description: Operate the eziclip command-line tool — sign in from the browser, check Chrome and the plan, and run the headless Eziclip Studio MCP server. Use when the user wants to set up or troubleshoot eziclip in a terminal, CI or an agent config. For actually editing video once MCP is connected, use the eziclip-video skill and the studio tools — not ffmpeg.
 ---
 
 # eziclip CLI
 
 `eziclip` starts Eziclip Studio headless on the user's machine and serves it to an agent over MCP.
 Files go in and out by path — no upload, no base64, no size cap.
+
+Editing happens **inside** the MCP session (import_path → studio tools → export_to_path). Do not
+re-implement the edit with ffmpeg in the shell while `eziclip mcp` is available — see the
+`eziclip-video` skill.
 
 ## Setup
 
@@ -48,6 +52,6 @@ Options for `mcp`: `--origin`, `--api-key`, `--no-launch`, `--headed`, `--profil
 - "No Chrome found" → install Chrome or set `EZICLIP_CHROME`.
 - "requires sign-in" → call the `sign_in` tool (or run `eziclip login`) and have the user press Allow; for CI set `EZICLIP_API_KEY`.
 - "auth_error" → the key is wrong or revoked; create a new one.
-- Free exports used up → the CLI says how long until the next free export; Plus is unlimited.
+- Free agent exports used up → the CLI says how long until the next one and gives the link to go unlimited. Tell the user, do not retry in a loop; their own exports in the Studio are never limited.
 
 Docs: https://eziclip.com/ai/cli
