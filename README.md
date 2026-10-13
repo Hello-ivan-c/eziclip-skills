@@ -29,7 +29,7 @@ curl -fsSL https://eziclip.com/skills/eziclip-video/SKILL.md -o ~/.claude/skills
 | Skill | |
 |---|---|
 | [`eziclip-video`](skills/eziclip-video/SKILL.md) | The editing workflow: watch, cut with a reason, preview, then export |
-| [`eziclip-cli`](skills/eziclip-cli/SKILL.md) | Set up and script the `eziclip` CLI: API key, doctor, JSON output |
+| [`eziclip-cli`](skills/eziclip-cli/SKILL.md) | Set up and script the `eziclip` CLI: sign-in, doctor, JSON output |
 
 ## Connect the editor
 

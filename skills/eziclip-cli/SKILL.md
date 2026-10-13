@@ -1,6 +1,6 @@
 ---
 name: eziclip-cli
-description: Operate the eziclip command-line tool — sign in with an API key, check Chrome and the plan, and run the headless Eziclip Studio MCP server. Use when the user wants to set up or troubleshoot eziclip in a terminal, CI or an agent config.
+description: Operate the eziclip command-line tool — sign in from the browser, check Chrome and the plan, and run the headless Eziclip Studio MCP server. Use when the user wants to set up or troubleshoot eziclip in a terminal, CI or an agent config.
 ---
 
 # eziclip CLI
@@ -11,7 +11,7 @@ Files go in and out by path — no upload, no base64, no size cap.
 ## Setup
 
 ```bash
-eziclip login --key ezc_…        # key from the account: Profile → API keys (shown once)
+eziclip login                     # opens the browser: the user presses Allow once
 eziclip doctor --json             # Chrome, studio address, key, plan
 claude mcp add eziclip -- npx -y eziclip mcp
 ```
@@ -19,8 +19,9 @@ claude mcp add eziclip -- npx -y eziclip mcp
 - Needs Node 20+ and Google Chrome (or Chromium / Edge) — video export uses Chrome's H.264 encoder.
   Set `EZICLIP_CHROME` to a specific browser.
 - The key is read from `--api-key`, then `EZICLIP_API_KEY`, then `~/.config/eziclip/credentials.json`.
-  In CI set `EZICLIP_API_KEY`; do not run `login`.
+  In CI set `EZICLIP_API_KEY` (a key made in Profile → API keys); do not run `login`.
 - Never print or commit the key. Revoke it in Profile → API keys if it leaks.
+- Inside an MCP session you do not need `login`: with no key the server offers a `sign_in` tool. Call it, show the user the link and the code it returns, and call it again once they press Allow — the editing tools appear.
 
 ## Contract (safe to script)
 
@@ -34,7 +35,8 @@ claude mcp add eziclip -- npx -y eziclip mcp
 | Command | What it does |
 |---|---|
 | `eziclip mcp` | MCP server on stdio (what an agent runs) |
-| `eziclip login --key …` | validate and save a key |
+| `eziclip login` | sign in: the user presses Allow in the browser |
+| `eziclip login --key …` | validate and save a key made in Profile (CI) |
 | `eziclip whoami` | account the key belongs to |
 | `eziclip logout` | forget the saved key |
 | `eziclip doctor` | Chrome, studio, key and plan (exits 1 when something is wrong) |
@@ -44,7 +46,7 @@ Options for `mcp`: `--origin`, `--api-key`, `--no-launch`, `--headed`, `--profil
 ## Troubleshooting
 
 - "No Chrome found" → install Chrome or set `EZICLIP_CHROME`.
-- "requires sign-in" → run `eziclip login --key …` or set `EZICLIP_API_KEY`.
+- "requires sign-in" → call the `sign_in` tool (or run `eziclip login`) and have the user press Allow; for CI set `EZICLIP_API_KEY`.
 - "auth_error" → the key is wrong or revoked; create a new one.
 - Free exports used up → the CLI says how long until the next free export; Plus is unlimited.
 
