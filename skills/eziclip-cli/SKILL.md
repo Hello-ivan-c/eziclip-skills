@@ -52,6 +52,6 @@ Options for `mcp`: `--origin`, `--api-key`, `--no-launch`, `--headed`, `--profil
 - "No Chrome found" → install Chrome or set `EZICLIP_CHROME`.
 - "requires sign-in" → call the `sign_in` tool (or run `eziclip login`) and have the user press Allow; for CI set `EZICLIP_API_KEY`.
 - "auth_error" → the key is wrong or revoked; create a new one.
-- Free agent exports used up → the CLI says how long until the next one and gives the link to go unlimited. Tell the user, do not retry in a loop; their own exports in the Studio are never limited.
+- Free agent tasks used up → a mutating tool refuses and says when the next slot opens. Tell the user, do not retry in a loop; exports themselves are never limited.
 
 Docs: https://eziclip.com/ai/cli

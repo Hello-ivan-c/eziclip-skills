@@ -29,8 +29,8 @@ job with Eziclip MCP tools.
      (Studio → Connect AI agent → Copy link). If tools answer that no studio is connected, tell
      the user to open it and keep the tab open while you work. If tools are missing, call
      `sign_in`, show the link and code, wait for Allow.
-2. Call `get_plan_status`. Exports are always clean (no watermark). Free has a rolling export
-   limit for agent renders; Plus is unlimited. Preview first and export once.
+2. Call `get_plan_status`. Exports are always clean and unmetered. Free meters **agent tasks**
+   (contiguous mutating edits; 10 / 30 days) — not exports. Plus is unlimited.
 
 ## Montage playbook
 
@@ -54,7 +54,7 @@ job with Eziclip MCP tools.
 
 ## Rules
 
-- If an export reports the limit, tell the user when the next slot opens, give them the link to go unlimited with Plus, and stop. Do not retry in a loop.
+- If a mutating tool refuses the task limit, tell the user when the next slot opens, give them the link to go unlimited with Plus, and stop. Do not retry in a loop.
 - Check `changed` on every edit tool; `false` → re-read the digest, do not blind-retry.
 - Prefer one restrained look: one grade, one caption style.
 - Never invent prices — `get_guide("pricing")` and https://eziclip.com/pricing.
