@@ -51,8 +51,10 @@ Hard-gated flow (tools refuse if you skip — use `get_edit_flow_status` when st
 1. `get_project_digest` → `get_style_profile` (apply notes unless told otherwise).
 2. Bring footage in: `import_path` (CLI) or `import_media` (URL).
 3. **Watch** before cutting: `get_filmstrip` / `describe_video`. Transcribe speech if missing.
-4. `get_guide("workflow")`, `get_guide("editing")`, then the genre guide (`short-form-vertical`,
-   `talking-head`, … via `get_guide("index")`).
+4. `get_guide("workflow")`, `get_guide("editing")`, then craft: `short-form-vertical`,
+   `finding-hooks-in-footage`, `first-two-seconds`; if 2+ videos → `multi-scene-social` +
+   `dense-storytelling` (full catalogue: `get_guide("index")`). The studio holds montage taste —
+   pull it; do not invent from thin air.
 5. **Brief (required):** `start_edit_brief` → ask the user in one message → `submit_edit_brief`.
    goal + platform are required; whatever the user leaves to you, choose and say what you chose.
    Checkpoints are optional — default is fully automatic.
@@ -60,11 +62,14 @@ Hard-gated flow (tools refuse if you skip — use `get_edit_flow_status` when st
    the ordered beats you keep. Cuts refuse without it. The tool also refuses plans that do not
    read as one coherent script (mid-sentence cuts, dangling "the second…" with no first).
    Always read the returned `script` aloud before cutting; revise and resubmit if it jumps.
-   Prefer one take that carries the arc over a quote patchwork. If the brief asked for a script
-   checkpoint, show the beats and wait for `approve_script`.
+   Tag beats with `mediaId`. Multiple files are usually different SCENES — mix with a job for
+   each (hook action from one, spine from another). Soft ~30 s is a container for one promise;
+   if scenes won't fit, **ask** (lengthen / spine / hook·cutaway); never silently drop a file.
+   Open on catching ACTION from the filmstrip when you have it. Script checkpoint if asked.
 7. **Structure from the transcript** — `assemble_from_plan` (one clip per beat, preferred when
    spanning takes) or cut by real word spans (`keep_time_windows` / `cut_source_range`), not a
-   paraphrased "viral story". Then captions.
+   paraphrased "viral story". Then captions. After music: if `durationAfter` ≫ picture, trim
+   before export.
 8. **Rough checkpoint (only if asked):** `get_edit_preview` → user says go → `approve_rough`.
 9. **Polish** (color / music / punch-ins / titles).
 10. **Finish:** `get_edit_preview` + change list → export (`export_to_path` / `export_video`).
