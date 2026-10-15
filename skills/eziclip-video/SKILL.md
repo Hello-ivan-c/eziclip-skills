@@ -46,26 +46,28 @@ Connect first — do not start in ffmpeg "until it's set up":
 
 ## Montage playbook
 
+Hard-gated flow (tools refuse if you skip — use `get_edit_flow_status` when stuck):
+
 1. `get_project_digest` → `get_style_profile` (apply notes unless told otherwise).
 2. Bring footage in: `import_path` (CLI) or `import_media` (URL).
 3. **Watch** before cutting: `get_filmstrip` / `describe_video`. Transcribe speech if missing.
 4. `get_guide("workflow")`, `get_guide("editing")`, then the genre guide (`short-form-vertical`,
    `talking-head`, … via `get_guide("index")`).
-5. **Structure from the transcript** — cut by real word spans (`cut_source_range`), not by a
-   paraphrased "viral story" you invented. Order: structure → captions → colour → sound → music.
-6. **Captions = spoken words** from the transcript (`enable_captions` + `set_caption_style`).
-   Do not burn paraphrased poster titles as captions. Titles/hooks are `add_title` only when
-   the user asked for titles.
-7. Colour: `auto_color` then one look across clips (`copy_props` / `match_grade`).
-8. Sound: `enhance_audio` on talking heads; check `get_audio_levels` / `get_mix_audio`. If voice
-   is quiet or muffled under a bed, fix volume/duck before export — do not export blind.
-9. Music: `search_audio` → `add_audio_asset` → duck with `set_audio_props`.
-10. `checkpoint` before risky passes; `get_frame` to verify look.
-11. Before export: `get_edit_preview` + a short change list → user approves.
-12. Export only when asked: `export_to_path` (CLI) or `export_video`.
+5. **Brief (required):** `start_edit_brief` → ask the user in one message → `submit_edit_brief`.
+   goal + platform are required; whatever the user leaves to you, choose and say what you chose.
+   Checkpoints are optional — default is fully automatic.
+6. **Plan (required):** `submit_edit_plan({ summary, beats, dropping })` — what the footage is and
+   the ordered beats you keep. Cuts refuse without it. If the brief asked for a script
+   checkpoint, show the beats and wait for `approve_script`.
+7. **Structure from the transcript** — cut by real word spans (`keep_time_windows` /
+   `cut_source_range`), not a paraphrased "viral story". Then captions.
+8. **Rough checkpoint (only if asked):** `get_edit_preview` → user says go → `approve_rough`.
+9. **Polish** (color / music / punch-ins / titles).
+10. **Finish:** `get_edit_preview` + change list → export (`export_to_path` / `export_video`).
 
 ## Rules
 
+- If a tool refuses with brief/plan/approve_* — do that step; do not invent a workaround.
 - If a mutating tool refuses the task limit, tell the user when the next slot opens, give them the link to go unlimited with Plus, and stop. Do not retry in a loop.
 - Check `changed` on every edit tool; `false` → re-read the digest, do not blind-retry.
 - Prefer one restrained look: one grade, one caption style.
