@@ -57,10 +57,14 @@ Hard-gated flow (tools refuse if you skip — use `get_edit_flow_status` when st
    goal + platform are required; whatever the user leaves to you, choose and say what you chose.
    Checkpoints are optional — default is fully automatic.
 6. **Plan (required):** `submit_edit_plan({ summary, beats, dropping })` — what the footage is and
-   the ordered beats you keep. Cuts refuse without it. If the brief asked for a script
+   the ordered beats you keep. Cuts refuse without it. The tool also refuses plans that do not
+   read as one coherent script (mid-sentence cuts, dangling "the second…" with no first).
+   Always read the returned `script` aloud before cutting; revise and resubmit if it jumps.
+   Prefer one take that carries the arc over a quote patchwork. If the brief asked for a script
    checkpoint, show the beats and wait for `approve_script`.
-7. **Structure from the transcript** — cut by real word spans (`keep_time_windows` /
-   `cut_source_range`), not a paraphrased "viral story". Then captions.
+7. **Structure from the transcript** — `assemble_from_plan` (one clip per beat, preferred when
+   spanning takes) or cut by real word spans (`keep_time_windows` / `cut_source_range`), not a
+   paraphrased "viral story". Then captions.
 8. **Rough checkpoint (only if asked):** `get_edit_preview` → user says go → `approve_rough`.
 9. **Polish** (color / music / punch-ins / titles).
 10. **Finish:** `get_edit_preview` + change list → export (`export_to_path` / `export_video`).
