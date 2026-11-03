@@ -65,7 +65,8 @@ Hard-gated flow (tools refuse if you skip — use `get_edit_flow_status` when st
    Tag beats with `mediaId`. Multiple files are usually different SCENES — mix with a job for
    each (hook action from one, spine from another). Soft ~30 s is a container for one promise;
    if scenes won't fit, **ask** (lengthen / spine / hook·cutaway); never silently drop a file.
-   Open on catching ACTION from the filmstrip when you have it. Script checkpoint if asked.
+   Open on catching ACTION from the filmstrip when you have it — that beat is
+   `kind:"visual"` (text optional); speech beats keep spoken `text`. Script checkpoint if asked.
 7. **Structure from the transcript** — `assemble_from_plan` (one clip per beat, preferred when
    spanning takes) or cut by real word spans (`keep_time_windows` / `cut_source_range`), not a
    paraphrased "viral story". Then captions. After music: if `durationAfter` ≫ picture, trim
