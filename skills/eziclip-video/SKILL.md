@@ -75,6 +75,16 @@ Hard-gated flow (tools refuse if you skip — use `get_edit_flow_status` when st
 9. **Polish** (color / music / punch-ins / titles).
 10. **Finish:** `get_edit_preview` + change list → export (`export_to_path` / `export_video`).
 
+## The craft library — what the studio gives you beyond tools
+
+Eziclip carries a craft library: editing, colour, sound, hook and design knowledge distilled from
+working film editors, colourists and performance-creative designers, written against these exact
+tools. It is served through the connected studio with `get_guide`, never copied into this skill.
+Before you build any piece, call `get_guide("index")` and open the genre playbook that matches it
+(`talking-head`, `short-form-vertical`, `product-ad`, `ad-creative`, `travel-cinematic`, …), then the
+techniques it points to. For paid-social ads, also use the `eziclip-ad-creative` skill: ads are layered
+brand collages, not captioned clips. Your own taste is the baseline; the library is the bar.
+
 ## Rules
 
 - If a tool refuses with brief/plan/approve_* — do that step; do not invent a workaround.

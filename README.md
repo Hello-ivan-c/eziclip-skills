@@ -30,10 +30,11 @@ curl -fsSL https://eziclip.com/skills/eziclip-video/SKILL.md -o ~/.claude/skills
 |---|---|
 | [`eziclip-video`](skills/eziclip-video/SKILL.md) | The editing workflow: watch, cut with a reason, preview, then export |
 | [`eziclip-cli`](skills/eziclip-cli/SKILL.md) | Set up and script the `eziclip` CLI: sign-in, doctor, JSON output |
+| [`eziclip-ad-creative`](skills/eziclip-ad-creative/SKILL.md) | Paid-social video ads that look like real branded creatives — points the agent at the studio's private `ad-creative` playbook |
 
 ## Connect the editor
 
-The skills teach the workflow; the tools come from Eziclip's MCP server:
+The skills teach the workflow; the tools — and the craft library (editing, colour, sound, hook and ad-design knowledge from working professionals, served by `get_guide`) — come from Eziclip's MCP server:
 
 - hosted link: https://eziclip.com/ai/mcp (open Studio → Connect AI agent → Copy link)
 - or the CLI (headless, files by path): `claude mcp add eziclip -- npx -y eziclip mcp` — see
